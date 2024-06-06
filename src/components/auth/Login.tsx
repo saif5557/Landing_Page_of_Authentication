@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Input, Button } from 'antd';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider, githubProvider } from '../../firebase';
+import { auth, googleProvider} from '../../firebase';
 import { login } from '../../redux/authSlice';
 import { FirebaseError } from 'firebase/app';
 import { toast } from 'react-toastify';
@@ -46,21 +46,7 @@ const Login: React.FC = () => {
     }
   };
 
-  const handleGithubLogin = async () => {
-    try {
-      const userCredential = await signInWithPopup(auth, githubProvider);
-      dispatch(login(userCredential.user!));
-      toast.success('Login Successfully!');
-    } catch (error) {
-      console.error('Error logging in with GitHub: ', error);
-      const firebaseError = error as FirebaseError;
-      if (firebaseError.code === 'auth/user-not-found') {
-        toast.error('User not registered. Please sign up.');
-      } else {
-        toast.error('Failed to log in. Please check your credentials.');
-      }
-    }
-  };
+
 
   return (
     <div className='signUpDiv'>
@@ -97,9 +83,6 @@ const Login: React.FC = () => {
           </Form.Item>
           <Form.Item wrapperCol={{ span: 24 }}>
             <Button type="default" onClick={handleGoogleLogin} className='btn' style={{ width: '100%' }}>Login with Google</Button>
-          </Form.Item>
-          <Form.Item wrapperCol={{ span: 24 }}>
-            <Button type="default" onClick={handleGithubLogin} className='btn' style={{ width: '100%' }}>Login with GitHub</Button>
           </Form.Item>
         </Form>
       </div>

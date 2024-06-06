@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
-  return <footer>Thid is developed by rupesh kumar</footer>;
+  return <footer >Created By Saif Mohammad</footer>;
 };
 
 export default Footer;
